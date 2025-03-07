@@ -1,6 +1,6 @@
 
 
-export default function Galeries() {
+export default function Galerie() {
     
 
     return (
