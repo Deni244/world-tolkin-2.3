@@ -80,7 +80,7 @@ export async function logInProfile(email: string, password: string): Promise<Res
     }
     catch (error) {
         console.error("Login error:", error);
-        return {success: false, message: "Server error" ,  status: 500 };
+        return {success: false, message: `Server error ${error}`  ,  status: 500 };
     }
 
 }
