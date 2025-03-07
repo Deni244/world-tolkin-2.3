@@ -14,6 +14,7 @@
     "jwt-decode": "^4.0.0",
     "mini-css-extract-plugin": "^2.9.2",
     "next": "^15.1.7",
+    "pg": "^8.13.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "sqlite": "^5.1.1",
