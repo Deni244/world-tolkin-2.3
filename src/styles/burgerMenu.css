@@ -1,0 +1,46 @@
+.burger-menu {
+    position: absolute;
+    z-index: 3;
+    min-height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+}
+.nav-link-burger {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 50px;
+}
+.nav-link-burger li {
+    display: flex;
+    justify-content: center;
+    width: 250px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+.nav-link-burger li .bg {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 19px;
+    width: 100%;
+    font-family: "Kurale", serif;
+    color: rgb(209, 209, 209);
+    background-color: rgb(0, 131, 131);
+    border-radius: 5px;
+    cursor: pointer;
+}
+@media (min-width: 400px){
+    .btn-close-burger {
+        left: 150px;
+    }
+}
+
+@media (max-width: 400px){
+    .btn-close-burger {
+        left: 100px;
+    }
+}

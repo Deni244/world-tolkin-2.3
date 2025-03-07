@@ -1,0 +1,51 @@
+.form-registry-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+.container-log-in {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin-top: 30px;
+    background-color: rgb(52, 52, 52);
+    border-radius: 10px;
+  }
+  .container-log-in input {
+    height: 30px;
+    width: 250px;
+    border-radius: 3px;
+  }
+  .container-log-in button {
+    width: 100px;
+    height: 30px;
+    background-color: aqua;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+.container-input-radio {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+  }
+.container-input-radio label {
+    margin-bottom: 10px;
+  }
+.form-reg-error {
+  color: red;
+  text-align: center;
+  width: 250px;
+}
+.form-input-good {
+  border: 2px solid green;
+}
+.form-input-error {
+  border: 2px solid red;
+}

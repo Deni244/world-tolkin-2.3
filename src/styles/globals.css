@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+ul {
+  list-style-type: none;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+body {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('../../public/Backgroudn.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment:fixed;
+}
+body::after {
+  content: "";
+  background: rgb(52, 52, 52);
+  background-attachment: fixed;
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  opacity: .7;
+  transition: all .25s ease;
+}
+
+.button-global {
+  font-size: 19px;
+  height: 30px;
+  padding: 0 5px 0 5px;
+  font-family: "Kurale", serif;
+  line-height: 30px;
+  color: rgb(209, 209, 209);
+  background-color: rgb(0, 131, 131);
+  border-radius: 5px;
+  cursor: pointer;
+}

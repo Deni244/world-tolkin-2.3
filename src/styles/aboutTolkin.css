@@ -1,0 +1,31 @@
+.about-tolkin-kontent {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    z-index: 1;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.about-tolkin-kontent h1 {
+    position: relative;
+    margin-top: 25px;
+    font-size: 35px;
+    color: rgb(45, 174, 174);
+}
+.about-tolkin-kontent div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    width: 90%;
+    background-color: rgb(52, 52, 52);
+    border-radius: 10px;
+}
+
+.about-tolkin-kontent div p {
+    display: block;
+    width: 95%;
+    font-size: 20px;
+    color: #ccd0cf;
+}
