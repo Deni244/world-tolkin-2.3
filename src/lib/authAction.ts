@@ -5,9 +5,6 @@ import { sql } from "@/lib/db";
 import { cookies } from "next/headers";
 import { User } from "@/types";
 
-
-
-
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "refreshsecret";
 
 type Result = {

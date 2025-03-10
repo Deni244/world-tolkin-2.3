@@ -19,7 +19,7 @@
     border-radius: 2px;
 }
 
-@media (max-width: 870px) {
+@media (max-width: 1015px) {
    .container-burger-btn {
     display: flex;
     justify-content: flex-end;

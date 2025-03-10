@@ -76,7 +76,11 @@ header {
 .display {
     display: none;
 }
-@media (max-width: 1080px) {
+@media (max-width: 1088px) {
+    .logo{
+        font-size: 25px;
+        width: 168px;
+    }
     .nav-link-li-a {
         font-size: 15px;
     }
@@ -85,7 +89,7 @@ header {
         color: rgb(0, 131, 131);
     }
 }
-@media (max-width: 870px) {
+@media (max-width: 1015px) {
     .nav-link {
     display: none;
    }
@@ -98,5 +102,6 @@ header {
 @media (max-width: 350px) {
     .logo {
         font-size: 15px;
+        width: 103px;
     }
 }

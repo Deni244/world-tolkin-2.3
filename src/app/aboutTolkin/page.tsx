@@ -9,13 +9,12 @@ export default function AboutTolkin() {
        <div className={`${kurale.className} about-tolkin-kontent`}>
         {
             tolkinBiography.map(elem =>(
-                <>
-                <h1>{elem.title}</h1>
-                <div key={elem.id}>
-                    <p>{elem.description}</p>
+                <div key={elem.id} className='content-container'>
+                    <h1 className='content-title'>{elem.title}</h1>
+                    <div>
+                        <p className='content-description'>{elem.description}</p>
+                    </div>
                 </div>
-
-                </>
             ))
         }
        </div>

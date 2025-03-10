@@ -7,14 +7,9 @@
     margin-bottom: 50px;
 }
 
-.about-tolkin-kontent h1 {
-    position: relative;
-    margin-top: 25px;
-    font-size: 35px;
-    color: rgb(45, 174, 174);
-}
-.about-tolkin-kontent div {
+.content-container{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     margin-top: 10px;
@@ -22,8 +17,20 @@
     background-color: rgb(52, 52, 52);
     border-radius: 10px;
 }
+.content-container div {
+    display: flex;
+    justify-content: center;
+}
 
-.about-tolkin-kontent div p {
+.content-title {
+    position: relative;
+    margin-top: 25px;
+    font-size: 35px;
+    color: rgb(45, 174, 174);
+    text-align: center;
+}
+
+.content-description {
     display: block;
     width: 95%;
     font-size: 20px;
