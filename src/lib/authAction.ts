@@ -1,9 +1,11 @@
 'use server'
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { connectDB } from "@/lib/db";
+import { sql } from "@/lib/db";
 import { cookies } from "next/headers";
 import { User } from "@/types";
+
+
 
 
 const REFRESH_SECRET = process.env.REFRESH_SECRET || "refreshsecret";
@@ -22,12 +24,6 @@ export async function createProfile(user: Omit<User, "id">){
     const {name, email, password, ...otherData} = user;
     //Перевірка чи є email та password
     if(!email || !password) return ({success: false, message: "Необхідно пошта та пароль", status: 401});
-    //Підключення до БД
-    const db = await connectDB();
-    //Отримання користувача за email
-    const dbUser = await db.get<User>("SELECT * FROM users WHERE email = ?", email);
-    //Якщо користувач з таким email існує то повертаєм помилку
-    if(dbUser) return ({success: false, message: `Користувач з email: ${email} вже існує!`, status: 401});
     const hashedPassword = await bcrypt.hash(password, 10);
     try {
         //Встановлення основних полів
@@ -37,38 +33,40 @@ export async function createProfile(user: Omit<User, "id">){
         for (const [key, value] of Object.entries(otherData)) {
             if (key !== "id" && value !== undefined) {
                 fields.push(key);
-                values.push(value);
+                values.push(typeof value === "boolean" ? value.toString() : value);
             }
         }
-        //Заміна всіх ключіва на знаки питання(так просить база даних)
-        const placeholders = fields.map(() => "?").join(", ");
+        const fieldsString = fields.join(", "); // "name, email, password"
+        const placeholders = fields.map((_, i) => `$${i + 1}`).join(", "); // "$1, $2, $3"
         //Створення правильного запиту до бази даних
-        const sql = `INSERT INTO users (${fields.join(", ")}) VALUES (${placeholders})`;
+        const query = `
+        INSERT INTO users (${fieldsString}) 
+        VALUES (${placeholders})
+      `;
+      await sql(query, values);
         //Запис у базу даних
-        await db.run(sql, values);
       return ({success: true, message: 'Реєстрація успішна!', status: 200});
       
     } catch (error: any) {
-        if (error.code === 'SQLITE_CONSTRAINT') {
-            return {success: false, message: 'Користувач вже існує!' };
+        if (error.code === "23505") {
+          return { success: false, message: "Користувач з таким email вже існує!", status: 401 };
         }
-        return {success: false, message: 'Помилка бази даних', error: error.message, status: 401 };
+        return {success: false, message: 'Помилка бази даних ' + error.message, error: error.message, status: 401 };
     }
 }
 
 //Функція логування користувача
 export async function logInProfile(email: string, password: string): Promise<Result>{
     try{    
-        const db = await connectDB();
-        const dbUser = await db.get<User>("SELECT * FROM users WHERE email = ?", email);
-        if (!dbUser){
+        const dbUser = await sql`SELECT id, name, email, password, sex, isAdmin FROM users WHERE email = ${email};`;
+        if (dbUser.length === 0){
           return {success: false, message: `Користувача з email: ${email} не існує!`, status: 400  };
         }
-        else if(!(await bcrypt.compare(password, dbUser.password))){
+        else if(!(await bcrypt.compare(password, dbUser[0].password))){
             return {success: false, message: "Ви ввели невірний пароль!", status: 400  };
         }
         //Генерація токенів
-        const refreshToken = jwt.sign({id: dbUser.id, email, name: dbUser.name },REFRESH_SECRET, {expiresIn: "7d"});
+        const refreshToken = jwt.sign({id: dbUser[0].id, email, name: dbUser[0].name },REFRESH_SECRET, {expiresIn: "7d"});
         const cookieStore = await cookies();
         cookieStore.set('refreshToken', refreshToken, {
             httpOnly: true,
@@ -76,7 +74,7 @@ export async function logInProfile(email: string, password: string): Promise<Res
             sameSite: "strict",
             path: "/" 
         });
-        return {success: true, user: {id: dbUser.id, email, name: dbUser.name }, message: `Вітаю ${dbUser.name}!`, status: 200 };
+        return {success: true, user: {id: dbUser[0].id, email, name: dbUser[0].name }, message: `Вітаю ${dbUser[0].name}!`, status: 200 };
     }
     catch (error) {
         console.error("Login error:", error);
