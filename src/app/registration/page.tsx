@@ -29,6 +29,9 @@ export default function Registration() {
         e.preventDefault();
         const user: User = {name: formData.name, email: formData.email, password: formData.password, sex: formData.sex}
         const result = await registry(user);
+        if (result.success) {
+          resetForm()
+        }
         openModal({title: result.message, buttonText: 'Продовжити', onConfirm: closeModal})
         console.log(result);
     }

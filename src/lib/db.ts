@@ -1,17 +1,15 @@
 'use server'
-
+//Підключення до віддаленої БД
 import { neon } from "@neondatabase/serverless";
 
-export async function getData() {
-  const sql = neon(process.env.DATABASE_URL!);  // Підключення до бази через DATABASE_URL
-  const data = await sql`SELECT * FROM your_table`;  // Виконання SQL-запиту
-  return data;
-}
+export const sql = neon(process.env.DATABASE_URL!)
+
+
+//Підключення до вбудованої БД
 
 // import  sqlite3  from "sqlite3";
 // import { open, Database } from "sqlite";
 
-// // Фнкц для підключення до БД
 // export async function connectDB(): Promise<Database> {
 //     return open({
 //         filename: "./database.sqlite",

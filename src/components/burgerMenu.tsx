@@ -36,7 +36,7 @@ export default function BurgerMenu (){
                 {
                     user ? (<>
                     <li ><Button1 title="Вихід" clas= 'bg' onClick={() =>{ closeModalState(); logout();}}/></li>
-                    <li ><span >{user.name}</span></li>
+                    <li ><Button1 title={user.name}  href={`/profile/${user.id}`} clas="bg" onClick={()=>closeModalState()}/></li>
                     </>) : (<>
                     <li ><Button1 title="Вхід" clas={`bg`} onClick={() => {closeModalState(); openModalState('login');}}/></li>
                     <li ><Button1 title="Реєстрація" href='/registration'  clas= 'bg' onClick={()=>closeModalState()}/></li>
