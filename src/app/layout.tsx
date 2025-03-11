@@ -19,6 +19,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const userData = await getUser();
+  
   return (
     <html lang="en">
       <AuthProvider initialUser={userData?.user || null}>

@@ -69,7 +69,8 @@ export async function logInProfile(email: string, password: string): Promise<Res
             httpOnly: true,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
-            path: "/" 
+            path: "/",
+            maxAge: 7 * 24 * 60 * 60,
         });
         return {success: true, user: {id: dbUser[0].id, email, name: dbUser[0].name }, message: `Вітаю ${dbUser[0].name}!`, status: 200 };
     }
@@ -134,6 +135,7 @@ export async function refresh() {
         secure: process.env.NODE_ENV === "production",
         sameSite: "strict",
         path: "/",
+        maxAge: 7 * 24 * 60 * 60,
       });
     }
     return { success: true, user: { id: decoded.id, email: decoded.email, name: decoded.name} , message: "Tokens refreshed", status: 200};
