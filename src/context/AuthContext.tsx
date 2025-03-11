@@ -24,18 +24,17 @@ export function AuthProvider ({ children, initialUser  }: { children: React.Reac
     const [user, setUser] = useState<Partial<User> | null>(initialUser);
     const [isRefreshing, setIsRefreshing] = useState(false);
 
-    async function refreshSession() {
-        if (isRefreshing || !user) return;
-        setIsRefreshing(true);
-    
-        const result = await refresh();
-        if (result.success && result.user) {
-          setUser(result.user);
-        } else {
-          setUser(null);
-        }
-        setIsRefreshing(false);
-      }
+    // async function refreshSession() {
+    //     if (isRefreshing || !user) return;
+    //     setIsRefreshing(true);
+    //     const result = await refresh();
+    //     if (result.success && result.user) {
+    //       setUser(result.user);
+    //     } else {
+    //       setUser(null);
+    //     }
+    //     setIsRefreshing(false);
+    //   }
 //Функція реєстрації
     async function registry(user: User): Promise<Result> {
         const result = await createProfile(user);
@@ -58,30 +57,30 @@ export function AuthProvider ({ children, initialUser  }: { children: React.Reac
         }
         return {message: result.message, status: result.status};
     }
-    // useEffect(() => {
-    //     async function loadUser() {
-    //       const result = await getUser();
-    //       if (result?.success) {
-    //         setUser(result.user);
-    //         await refresh();
-    //       }
-    //     }
-    //     loadUser();
-    //   }, []);
-
     useEffect(() => {
-        refreshSession();
+        async function loadUser() {
+          const result = await getUser();
+          if (result?.success) {
+            setUser(result.user);
+            await refresh();
+          }
+        }
+        loadUser();
       }, []);
 
-      useEffect(() => {
-        if (!user) return; // Якщо користувача немає, не оновлюємо
+    // useEffect(() => {
+    //     refreshSession();
+    //   }, []);
+
+    //   useEffect(() => {
+    //     if (!user) return; // Якщо користувача немає, не оновлюємо
     
-        const interval = setInterval(() => {
-          refreshSession();
-        }, 15 * 60 * 1000); // Оновлення кожні 15 хвилин
+    //     const interval = setInterval(() => {
+    //       refreshSession();
+    //     }, 15 * 60 * 1000); // Оновлення кожні 15 хвилин
     
-        return () => clearInterval(interval); // Очищаємо інтервал при виході
-      }, [user]);
+    //     return () => clearInterval(interval); // Очищаємо інтервал при виході
+    //   }, [user]);
       
     return (
         <AuthContext.Provider value={{ user, registry, login, logout }}>
