@@ -1,5 +1,4 @@
 'use client'
-import { kurale } from "@/lib/fonts";
 import { usePathname } from "next/navigation"
 import { navItems } from "@/data/navItems";
 import { useAuth } from "@/context/AuthContext";
@@ -18,7 +17,7 @@ export default function Navigation() {
             {
                 navItems.map(item =>(
                     <li key={item.id} className="nav-link-li">
-                        <Button1 title={item.title} clas={`${ kurale.className} ${pathName === item.path && 'activeLink' } nav-link-li-a`} href={item.path}/>
+                        <Button1 title={item.title} clas={`${pathName === item.path && 'activeLink' } nav-link-li-a`} href={item.path}/>
                     </li>
                 ))
             }

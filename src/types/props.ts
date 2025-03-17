@@ -3,3 +3,11 @@ export type Props ={
     classes?: string;
     message?: string;
 }
+
+export type BooksProps = {
+    id?: string;
+    name: string;
+    description: string;
+    photo: string;
+    price: string;
+}

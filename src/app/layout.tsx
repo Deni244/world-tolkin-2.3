@@ -1,16 +1,18 @@
 import { AuthProvider } from "@/context/AuthContext";
 import type { Metadata } from "next";
 import Header from "@/components/Header";
-import "@/styles/globals.css";
 import BurgerMenu from "@/components/burgerMenu";
 import LogIn from "@/components/logIn";
 import ModalWindow from "@/components/modalWindow";
 import { getUser } from "@/lib/authAction";
+import "./layout.css";
+import { kurale, yesevaOne, rubikDirt } from "@/lib/fonts";
 
 
 export const metadata: Metadata = {
   title: "Світ Толкіна",
   description: "Світ Толкіна",
+  
 };
 
 export default async function RootLayout({
@@ -21,7 +23,7 @@ export default async function RootLayout({
   const userData = await getUser();
   
   return (
-    <html lang="en">
+    <html lang="en" className={`${kurale.variable} ${yesevaOne.variable} ${rubikDirt.variable}`}>
       <AuthProvider initialUser={userData?.user || null}>
         <body >
           <Header />

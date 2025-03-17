@@ -1,12 +1,17 @@
 import {tolkinBiography} from '@/data/aboutTolkin'
-import { kurale } from '@/lib/fonts'
 import '@/styles/aboutTolkin.css'
+import { Metadata } from 'next';
+export const metadata: Metadata = {
+    title: "Про Толкіна",
+    description: "Про Толкіна, дитинство Толкіна, шкільні та університетські роки",
+    
+  };
 
 
 export default function AboutTolkin() {
     
     return (
-       <div className={`${kurale.className} about-tolkin-kontent`}>
+       <div className={`about-tolkin-kontent`}>
         {
             tolkinBiography.map(elem =>(
                 <div key={elem.id} className='content-container'>

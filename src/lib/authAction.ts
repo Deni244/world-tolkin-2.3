@@ -63,7 +63,7 @@ export async function logInProfile(email: string, password: string): Promise<Res
             return {success: false, message: "Ви ввели невірний пароль!", status: 400  };
         }
         //Генерація токенів
-        const refreshToken = jwt.sign({id: dbUser[0].id, email, name: dbUser[0].name },REFRESH_SECRET, {expiresIn: "7d"});
+        const refreshToken = jwt.sign({id: dbUser[0].id, email, name: dbUser[0].name, isAdmin: dbUser[0].isadmin },REFRESH_SECRET, {expiresIn: "7d"});
         const cookieStore = await cookies();
         cookieStore.set('refreshToken', refreshToken, {
             httpOnly: true,
@@ -72,7 +72,7 @@ export async function logInProfile(email: string, password: string): Promise<Res
             path: "/",
             maxAge: 7 * 24 * 60 * 60,
         });
-        return {success: true, user: {id: dbUser[0].id, email, name: dbUser[0].name }, message: `Вітаю ${dbUser[0].name}!`, status: 200 };
+        return {success: true, user: {id: dbUser[0].id, email, name: dbUser[0].name, isAdmin: dbUser[0].isadmin }, message: `Вітаю ${dbUser[0].name}!`, status: 200 };
     }
     catch (error) {
         console.error("Login error:", error);
@@ -107,8 +107,8 @@ export async function getUser() {
   let refreshToken = cookieStore.get("refreshToken")?.value;
   if (!refreshToken) return {success: false, user: null, message: "Refresh token not found", status: 401 };
   try {
-    let decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string; name: string };
-    return {success: true, user: {id: decoded.id, name: decoded.name, email: decoded.email}, status: 200 };
+    let decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string; name: string, isAdmin: boolean };
+    return {success: true, user: {id: decoded.id, name: decoded.name, email: decoded.email, isAdmin: decoded.isAdmin }, status: 200 };
   } catch {
     return null;
   }
@@ -120,14 +120,14 @@ export async function refresh() {
   const refreshToken = cookieStore.get("refreshToken")?.value;
   if (!refreshToken) return {success: false, user: null, message: "Refresh token not found", status: 401 };
   try {
-    const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string, name: string, lastRefresh?: number };
+    const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string, name: string, isAdmin: boolean, lastRefresh?: number };
     //Отримання поточної дати
     const now = Math.floor(Date.now() / 1000);
     const lastRefresh = decoded.lastRefresh || 0;
     // Якщо останнє оновлення було більше ніж 24 години то йде оновлення refreshToken
     let newRefreshToken = refreshToken;
     if (now - lastRefresh > 86400) { // 86400 секунд = 24 години
-      newRefreshToken = jwt.sign({ id: decoded.id, email: decoded.email, name: decoded.name, lastRefresh: now }, REFRESH_SECRET, { expiresIn: "7d" });
+      newRefreshToken = jwt.sign({ id: decoded.id, email: decoded.email, name: decoded.name, isAdmin: decoded.isAdmin, lastRefresh: now }, REFRESH_SECRET, { expiresIn: "7d" });
 
       // Закидання refreshToken у cookies
       cookieStore.set("refreshToken", newRefreshToken, {
@@ -138,7 +138,7 @@ export async function refresh() {
         maxAge: 7 * 24 * 60 * 60,
       });
     }
-    return { success: true, user: { id: decoded.id, email: decoded.email, name: decoded.name} , message: "Tokens refreshed", status: 200};
+    return { success: true, user: { id: decoded.id, email: decoded.email, name: decoded.name, isAdmin: decoded.isAdmin} , message: "Tokens refreshed", status: 200};
   } catch (error) {
     return { success: null, user: null, message: "Invalid refresh token", status: 400 };
   }

@@ -1,0 +1,58 @@
+.book-cnt {
+    display: flex;
+    font-family: var(--font-kurale), sans-serif;
+    margin: 10px 0 20px 0;
+    width: 95%;
+    border: 2px solid rgb(52, 52, 52);
+    border-radius: 20px;
+}
+.image-book-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    min-width: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+.image-book-cnt span {
+    color: white;
+}
+.image-book {
+   height: 235px;
+
+}
+.name-description-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.name-book-cnt {
+    width: 95%;
+    text-align: start;
+}
+.name-book {
+    font-size: 35px;
+    color: rgb(45, 174, 174);
+}
+.description-book-cnt {
+    flex-wrap: wrap;
+    background-color: rgb(52, 52, 52);
+    border-radius: 10px;
+    color: rgb(209, 209, 209);
+    font-size: 20px;
+    margin: 0 10px 10px 10px;
+}
+.description-book {
+    display: -webkit-box;
+    line-clamp: 3;
+  -webkit-line-clamp: 3; /* Максимальна кількість рядків */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.3s ease-in-out;
+  font-size: 1em; 
+    padding: 0 10px 0 10px;
+}

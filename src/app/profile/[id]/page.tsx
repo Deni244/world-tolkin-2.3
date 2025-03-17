@@ -11,7 +11,6 @@ type PageProps = {
 async function getUser(id: string) {
   if (!/^\d+$/.test(id)) return undefined;
   const user = await sql`SELECT id, name, email, sex, isAdmin FROM users WHERE id = ${id};`
-  console.log(user[0]);
   return  user[0];
 }
 

@@ -1,10 +1,7 @@
 'use client'
 import { useAuth } from "@/context/AuthContext";
 import { navItems } from "@/data/navItems";
-import { kurale } from "@/lib/fonts";
 import '../styles/burgerMenu.css'
-import { useState } from "react";
-import MenuButton from "./menuButton";
 import Button1 from "./button1";
 import ButtonClose from "./buttonClose";
 import { useModalState } from "@/store/ModalState";
@@ -29,7 +26,7 @@ export default function BurgerMenu (){
                 {
                     navItems.map(item =>(
                         <li key={item.id} >
-                            <Button1 title={item.title} onClick={() => closeModalState()} clas={`${ kurale.className} bg`} href={item.path}/>
+                            <Button1 title={item.title} onClick={() => closeModalState()} clas='bg' href={item.path}/>
                         </li>
                     ))
                 }

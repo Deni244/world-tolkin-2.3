@@ -25,9 +25,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: var(--font-kurale), sans-serif;
     font-size: 19px;
     width: 100%;
-    font-family: "Kurale", serif;
     color: rgb(209, 209, 209);
     background-color: rgb(0, 131, 131);
     border-radius: 5px;
