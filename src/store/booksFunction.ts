@@ -1,3 +1,4 @@
+
 import { BooksProps } from "@/types";
 
 
@@ -33,4 +34,19 @@ export async function addBook(book: BooksProps) {
     });
     const newDB = await res.json();
   
+  }
+
+  export async function deleteBook(id: string) {
+    console.log(`deleteBook: ${id}`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+          id: id
+      }),
+    })
+    const result = await res.json();
+    return result;
   }

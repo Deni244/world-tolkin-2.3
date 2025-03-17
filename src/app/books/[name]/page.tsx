@@ -8,8 +8,10 @@ type PageProps = {
 export default async function NameBook({params}: PageProps) {
     const {name} = await params;
     const book = await GetOneBook(name);
+    
     return (
         <Book key={book.id}
+        id={book.id}
         name={book.name}
         description={book.description}
         photo={book.photo}

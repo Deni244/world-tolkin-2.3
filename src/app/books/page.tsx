@@ -19,6 +19,7 @@ export default async function BooksPage() {
             {
                 books.map((book: BooksProps) => (
                     <Book key={book.id}
+                    id={book.id}
                     name={book.name}
                     description={book.description}
                     photo={book.photo}
