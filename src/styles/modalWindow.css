@@ -3,14 +3,14 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    position: absolute;
+    position: fixed;
     z-index: 100;
     width: 80%;
     height: 200px;
     background-color:white;
     border-radius: 20px;
     border: 2px solid white;
-    top: calc(50% - 100px);
+    top: calc(100vh - 60%);
     left: 50%;
     transform: translateX(-50%);
 }
@@ -20,6 +20,11 @@
     color: black;
     text-align: center;
     margin: 5px;
+}
+@media (max-width: 480px){
+    .modal-window-container{
+        top: calc(100vh - 25%);
+    }
 }
 
 

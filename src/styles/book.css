@@ -23,22 +23,45 @@
    height: 235px;
 
 }
+.book-button_container {
+    display: flex;
+    width: 100%;
+    gap: 10px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
 .name-description-cnt {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
+    width: 100%;
 }
 .name-book-cnt {
     width: 95%;
     text-align: start;
 }
 .name-book {
+    position: relative;
     font-size: 35px;
     color: rgb(45, 174, 174);
 }
+.name-book::after {
+    content: "";
+    background: white;
+    height: 3px;
+    width: 100%;
+    position: absolute;
+    bottom: 5px;
+    left: 0;
+    transform: scaleX(0);
+    transition: all .15s ease-in 0s;
+}
+.name-book:hover::after {
+    transform: scaleX(1);
+    background: rgb(0, 131, 131);
+}
 .description-book-cnt {
-    flex-wrap: wrap;
     background-color: rgb(52, 52, 52);
     border-radius: 10px;
     color: rgb(209, 209, 209);
@@ -47,12 +70,48 @@
 }
 .description-book {
     display: -webkit-box;
-    line-clamp: 3;
-  -webkit-line-clamp: 3; /* Максимальна кількість рядків */
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: all 0.3s ease-in-out;
-  font-size: 1em; 
+    line-clamp: 7;
+    -webkit-line-clamp: 7; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    transition: all 0.3s ease-in-out;
     padding: 0 10px 0 10px;
+}
+.description-book-cnt a {
+    color: rgb(0, 131, 131);
+}
+@media (max-width: 768px) and (min-width: 480px) {
+    .name-book {
+        font-size: 25px;
+    }
+    .description-book-cnt {
+        font-size: 15px;
+    }
+    .description-book {
+        line-clamp: 10;
+    -webkit-line-clamp: 10;
+    }
+}
+@media (max-width: 480px) {
+    .image-book {
+        height: 200px;
+    }
+    .name-book-cnt {
+        text-align: center;
+    }
+    .name-book {
+        font-size: 23px;
+    }
+    .description-book-cnt {
+        font-size: 15px;
+    }
+    .book-cnt {
+        flex-direction: column;
+    }
+    .book-button_container {
+        justify-content: center;
+    }
 }

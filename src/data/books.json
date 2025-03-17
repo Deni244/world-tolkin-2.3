@@ -1,23 +1,23 @@
 [
   {
     "id": "1",
-    "name": "Книга 1",
-    "description": " Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "name": "Silmarilion",
+    "description": "Ця книга — легендарна провісниця Володаря Перснів — пропонує цілісну міфологічну історію майстерно вифантазуваного, але такого реалістичного світу Середзем’я. Стрункий і взаємопов’язаний кодекс, у якому йдеться про епічну боротьбу між добром і злом, становлять окремі твори: Айнуліндале — міф про Творення світу, про виникнення Зла та причини Падіння; Валаквента — картина ієрархії божественних сил, зображення їхньої вдачі та ролі у Творінні; ",
     "photo": "/books/Silmarilion.jpg",
     "price": "30"
   },
   {
     "id": "2",
-    "name": "Книга 2",
-    "description": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of de Finibus Bonorum et Malorum (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, Lorem ipsum dolor sit amet.., comes from a line in section 1.10.32.",
-    "photo": "/books/Silmarilion.jpg",
+  "name": "Гоббіт",
+    "description": "Це історія надзвичайної пригоди, яку втнула ватага ґномів, узявшись відшукати загарбане драконом золото. Мимохіть учасником цієї ризикованої виправи став Більбо Торбин, прихильний до комфорту і позбавлений амбіцій гобіт, котрий, на власний подив, виявив неабияку винахідливість і вправність у ролі зломщика. Сутички з тролями, ґоблінами, ґномами, ельфами та гігантськими павуками, бесіда з драконом, Смоґом Величним, і радше мимовільна присутність на Битві П’ятьох Армій — ось лише деякі пригоди, що їх судилося пережити Більбо. ",
+    "photo": "/books/ГобітТудиІЗвідти.jpg",
     "price": "40"
   },
   {
     "id": "3",
-    "name": "Книга 3",
-    "description": "Опис книги 3",
-    "photo": "/books/Silmarilion.jpg",
+    "name": "Володар Перстнів Братство Перстня",
+    "description": "Дія роману відбувається в Середзем'ї, світі, який населяють ельфи, гноми, чарівники, люди та багато хто ще. Але є серед них непримітний народець гобіти, що ведуть тихе і відокремлене життя, і ніяк не беруть участь в історії Середзем'я. За винятком старого Більбо Торбина, який під час своїх пригод випадково здобув магічний перстень, який залишає в спадок своєму племінникові Фродо.",
+    "photo": "/books/ВолодарПерстнівБратствоПерстня.jpg",
     "price": "20"
   }
 ]
