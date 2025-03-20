@@ -63,7 +63,20 @@ export async function logInProfile(email: string, password: string): Promise<Res
             return {success: false, message: "Ви ввели невірний пароль!", status: 400  };
         }
         //Генерація токенів
-        const refreshToken = jwt.sign({id: dbUser[0].id, email, name: dbUser[0].name, isAdmin: dbUser[0].isadmin },REFRESH_SECRET, {expiresIn: "7d"});
+        const userToken = await generateRefreshToken(dbUser[0])
+        
+        return {success: true, user: {id: userToken.user.id, email: userToken.user.email, name: userToken.user.name, isAdmin: userToken.user.isAdmin }, message: `Вітаю ${userToken.user.name}!`, status: 200 };
+    }
+    catch (error) {
+        console.error("Login error:", error);
+        return {success: false, message: `Server error ${error}`  ,  status: 500 };
+    }
+
+}
+
+//Функція генерації токену
+export async function generateRefreshToken(user:Partial<User>) {
+  const refreshToken = jwt.sign({id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin },REFRESH_SECRET, {expiresIn: "7d"});
         const cookieStore = await cookies();
         cookieStore.set('refreshToken', refreshToken, {
             httpOnly: true,
@@ -72,13 +85,27 @@ export async function logInProfile(email: string, password: string): Promise<Res
             path: "/",
             maxAge: 7 * 24 * 60 * 60,
         });
-        return {success: true, user: {id: dbUser[0].id, email, name: dbUser[0].name, isAdmin: dbUser[0].isadmin }, message: `Вітаю ${dbUser[0].name}!`, status: 200 };
-    }
-    catch (error) {
-        console.error("Login error:", error);
-        return {success: false, message: `Server error ${error}`  ,  status: 500 };
-    }
+        return {success: true, user: {id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, status: 200 };
+}
 
+
+//Скорочена функція реєстрації
+export async function shortCreateProfile(name:string, email: string) {
+  const values = [name, email, null];
+    const query = `
+        INSERT INTO users (name, email, password) 
+        VALUES ($1, $2, $3)
+        RETURNING id, name, email, isAdmin
+      `;
+      const res = await sql(query, values);
+      console.log(`Результат збереження користувача: ${res}`);
+      if(!res[0].id) throw new Error("Помилка при створенні користувача");
+      const user = await generateRefreshToken(res[0]);
+      if (!user.user) {
+        throw new Error("Помилка при створенні токена!");
+      }
+      
+      return {success: true, status: 200 };
 }
 
 //Функція Виходу з профіля
