@@ -6,6 +6,8 @@ import { User } from "@/types";
 import { validateFormFun } from "@/store/validateFormFunction";
 import { useModalStore } from "@/store/ModalWindowState";
 import '../../styles/formRegistry.css'
+import Button1 from "@/components/button1";
+import { signIn } from "next-auth/react";
 
 export default function Registration() {
     const {registry} = useAuth();
@@ -64,7 +66,8 @@ export default function Registration() {
                 <label>Жінка</label>
 
            </div>
-           <button type="submit">Зареєструватися</button>
+           <button className="button-global" type="submit">Зареєструватися</button>
+           <Button1 title="Увійти через Google" clas="button-global" onClick={()=>signIn('google')} />
         </form>
         </div>
     )

@@ -23,10 +23,14 @@ export default async function Post({ params }: PageProps) {
         <Button1 title="На Головну"  href='/' clas="button-global"/>
       </div>
     }
+    const name = user.name.split(" ");
+    console.log(name[0]);
+    console.log(name[1]);
+    
     return (
       <>
       <h1 className='user-page-title'>{`${(user.name).toUpperCase()} ${user.isadmin ? '(Admin)': ''}`}</h1>
-      <h1 className='user-page-title'>{`${(user.sex).toUpperCase()} from Middle Earth`}</h1>
+      {user.sex ?<h1 className='user-page-title'>{`${(user.sex).toUpperCase()} from Middle Earth`}</h1> : null}
       </>
     );
   }

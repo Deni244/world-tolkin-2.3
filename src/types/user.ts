@@ -4,7 +4,7 @@ export type User = {
     email: string,
     password: string,
     sex: string,
-    isAdmin?: boolean
+    isadmin?: boolean
   }
 
   export type User2 = [
@@ -13,5 +13,5 @@ export type User = {
     email: string,
     password: string,
     sex?: string,
-    isAdmin?: boolean
+    isadmin?: boolean
   ]

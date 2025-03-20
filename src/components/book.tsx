@@ -33,7 +33,7 @@ export default function Book(book: BooksProps) {
                     <p className="description-book">{book.description}</p><Link href={`/books/${book.name}`}>Детальніше</Link>
                 </div>
                 {
-                    user?.isAdmin && <div className="book-button_container">
+                    user?.isadmin && <div className="book-button_container">
                     < Button1 clas="button-global" title="Видалити" onClick={()=>handleDeleBook(book.id!) } />
                     < Button1 clas="button-global" title="Змінити" />
                     </div>

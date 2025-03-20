@@ -6,10 +6,13 @@ import Button1 from "./button1";
 import { useModalState } from "@/store/ModalState";
 import MenuButton from "./menuButton";
 
+
 export default function Navigation() {
     const pathName = usePathname();
     const {user, logout} = useAuth();
     const {openModalState} = useModalState();
+
+    
 
     return (
         <>
@@ -24,7 +27,7 @@ export default function Navigation() {
             {
                 user ? (<>
                 <li className="nav-link-li"><Button1 title="Вихід"  onClick={logout} clas="button-global"  /></li>
-                <li className="nav-link-li"><Button1 title={user.name}  href={`/profile/${user.id}`} clas="button-global"  /></li>
+                <li className="nav-link-li"><Button1 title={user.name!.split(" ")[0].padEnd(10).charAt(0).toUpperCase() + user.name!.split(" ")[0].padEnd(10).slice(1)}  href={`/profile/${user.id}`} clas="button-global"  /></li>
                 </>) : (<>
                 <li className="nav-link-li"><Button1 title="Вхід" clas="button-global" onClick={()=>openModalState('login')} /></li>
                 <li className="nav-link-li"><Button1 title="Реєстрація" clas= 'button-global' href='/registration'/></li>

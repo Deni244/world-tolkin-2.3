@@ -21,10 +21,12 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const userData = await getUser();
+  console.log(userData?.user);
+  
   
   return (
     <html lang="en" className={`${kurale.variable} ${yesevaOne.variable} ${rubikDirt.variable}`}>
-      <AuthProvider initialUser={userData?.user || null}>
+      <AuthProvider>
         <body >
           <Header />
           <main>

@@ -5,6 +5,8 @@ import ButtonClose from "./buttonClose";
 import { useModalStore } from "@/store/ModalWindowState";
 import { useModalState } from "@/store/ModalState";
 import '../styles/formLogIn.css'
+import Button1 from "./button1";
+import { signIn } from "next-auth/react";
 
 export default function LogIn() {
     const [formDataLogIn, setFormDataLogIn] = useState({
@@ -24,7 +26,6 @@ export default function LogIn() {
     const handleSubmit: FormEventHandler<HTMLFormElement> = async (e) =>{
         e.preventDefault();
         const result = await login(formDataLogIn.email, formDataLogIn.password);
-        console.log(result);
         if(result.success) {
             setMessageError('');
             setFormDataLogIn({email:'', password: ''})
@@ -49,6 +50,7 @@ export default function LogIn() {
                     <input type="password" name="password" value={formDataLogIn.password} onChange={handleChange} placeholder="Пароль" required />
                     { messageError !== '' && <p className="form-log-in-error-sms">{messageError}</p> }
                     <button className="btn-log-in-form" type="submit">Увійти</button>
+                    <Button1 title="Увійти через Google" clas="button-global" onClick={()=>signIn('google')} />
                 </form>
             </div>
         </div>

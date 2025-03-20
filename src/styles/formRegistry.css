@@ -22,13 +22,6 @@
     width: 250px;
     border-radius: 3px;
   }
-  .container-log-in button {
-    width: 100px;
-    height: 30px;
-    background-color: aqua;
-    border-radius: 5px;
-    cursor: pointer;
-  }
 .container-input-radio {
     display: flex;
     flex-direction: column;

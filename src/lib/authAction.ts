@@ -55,17 +55,19 @@ export async function createProfile(user: Omit<User, "id">){
 //Функція логування користувача
 export async function logInProfile(email: string, password: string): Promise<Result>{
     try{    
-        const dbUser = await sql`SELECT id, name, email, password, sex, isAdmin FROM users WHERE email = ${email};`;
+        const dbUser = await sql`SELECT id, name, email, password, sex, isadmin FROM users WHERE email = ${email};`;
         if (dbUser.length === 0){
           return {success: false, message: `Користувача з email: ${email} не існує!`, status: 400  };
         }
         else if(!(await bcrypt.compare(password, dbUser[0].password))){
             return {success: false, message: "Ви ввели невірний пароль!", status: 400  };
         }
-        //Генерація токенів
+        //Генерація токену
+        console.log(`Ця змінна з логування перед створенням токену ${dbUser[0].isadmin}`);
+        
         const userToken = await generateRefreshToken(dbUser[0])
         
-        return {success: true, user: {id: userToken.user.id, email: userToken.user.email, name: userToken.user.name, isAdmin: userToken.user.isAdmin }, message: `Вітаю ${userToken.user.name}!`, status: 200 };
+        return {success: true, user: {id: userToken.user.id, email: userToken.user.email, name: userToken.user.name, isadmin: userToken.user.isadmin }, message: `Вітаю ${userToken.user.name}!`, status: 200 };
     }
     catch (error) {
         console.error("Login error:", error);
@@ -74,36 +76,31 @@ export async function logInProfile(email: string, password: string): Promise<Res
 
 }
 
-//Функція генерації токену
-export async function generateRefreshToken(user:Partial<User>) {
-  const refreshToken = jwt.sign({id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin },REFRESH_SECRET, {expiresIn: "7d"});
-        const cookieStore = await cookies();
-        cookieStore.set('refreshToken', refreshToken, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "strict",
-            path: "/",
-            maxAge: 7 * 24 * 60 * 60,
-        });
-        return {success: true, user: {id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, status: 200 };
-}
-
 
 //Скорочена функція реєстрації
 export async function shortCreateProfile(name:string, email: string) {
-  const values = [name, email, null];
+  const dbUser = await sql`SELECT id, name, email, password, sex, isadmin FROM users WHERE email = ${email};`;
+  if(dbUser.length === 0){
+    const values = [name, email, null];
     const query = `
         INSERT INTO users (name, email, password) 
         VALUES ($1, $2, $3)
-        RETURNING id, name, email, isAdmin
+        RETURNING id, name, email, isadmin
       `;
       const res = await sql(query, values);
-      console.log(`Результат збереження користувача: ${res}`);
       if(!res[0].id) throw new Error("Помилка при створенні користувача");
       const user = await generateRefreshToken(res[0]);
       if (!user.user) {
         throw new Error("Помилка при створенні токена!");
       }
+  }else{
+    const user = await generateRefreshToken(dbUser[0]);
+      if (!user.user) {
+        throw new Error("Помилка при створенні токена!");
+      }
+  }
+ 
+      
       
       return {success: true, status: 200 };
 }
@@ -123,7 +120,6 @@ export async function exitProfile() {
       return { success: true, message: "Вихід успішно здійснено!", status: 200 };
     }
     catch (error){
-      console.error("Logout error:", error);
       return {success: false, message: "Server error", status: 500 };
     }
   }
@@ -134,11 +130,32 @@ export async function getUser() {
   let refreshToken = cookieStore.get("refreshToken")?.value;
   if (!refreshToken) return {success: false, user: null, message: "Refresh token not found", status: 401 };
   try {
-    let decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string; name: string, isAdmin: boolean };
-    return {success: true, user: {id: decoded.id, name: decoded.name, email: decoded.email, isAdmin: decoded.isAdmin }, status: 200 };
+    let decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string; name: string, isadmin: boolean };
+    return {success: true, user: {id: decoded.id, name: decoded.name, email: decoded.email, isadmin: decoded.isadmin }, status: 200 };
   } catch {
     return null;
   }
+}
+
+//Функція генерації токену
+export async function generateRefreshToken(user: Partial<User>) {
+  const now = Math.floor(Date.now() / 1000);
+  const refreshToken = jwt.sign({
+    id: user.id, 
+    email: user.email,
+    name: user.name, 
+    isadmin: user.isadmin, 
+    lastRefresh: now 
+  },REFRESH_SECRET, {expiresIn: "7d"});
+        const cookieStore = await cookies();
+        cookieStore.set('refreshToken', refreshToken, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "strict",
+            path: "/",
+            maxAge: 7 * 24 * 60 * 60,
+        });
+        return {success: true, user: {id: user.id, email: user.email, name: user.name, isadmin: user.isadmin }, lastRefresh: now, status: 200 };
 }
 
 //Оновлення Токену
@@ -147,25 +164,17 @@ export async function refresh() {
   const refreshToken = cookieStore.get("refreshToken")?.value;
   if (!refreshToken) return {success: false, user: null, message: "Refresh token not found", status: 401 };
   try {
-    const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string, name: string, isAdmin: boolean, lastRefresh?: number };
+    const decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string, name: string, isadmin: boolean, lastRefresh?: number };
     //Отримання поточної дати
     const now = Math.floor(Date.now() / 1000);
-    const lastRefresh = decoded.lastRefresh || 0;
+    const lastRefresh = decoded.lastRefresh ?? 0;
     // Якщо останнє оновлення було більше ніж 24 години то йде оновлення refreshToken
     let newRefreshToken = refreshToken;
     if (now - lastRefresh > 86400) { // 86400 секунд = 24 години
-      newRefreshToken = jwt.sign({ id: decoded.id, email: decoded.email, name: decoded.name, isAdmin: decoded.isAdmin, lastRefresh: now }, REFRESH_SECRET, { expiresIn: "7d" });
-
-      // Закидання refreshToken у cookies
-      cookieStore.set("refreshToken", newRefreshToken, {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: "strict",
-        path: "/",
-        maxAge: 7 * 24 * 60 * 60,
-      });
+      const res = await generateRefreshToken({ id: decoded.id, email: decoded.email, name: decoded.name, isadmin: decoded.isadmin})
+      newRefreshToken = res.lastRefresh.toString();
     }
-    return { success: true, user: { id: decoded.id, email: decoded.email, name: decoded.name, isAdmin: decoded.isAdmin} , message: "Tokens refreshed", status: 200};
+    return { success: true, user: { id: decoded.id, email: decoded.email, name: decoded.name, isadmin: decoded.isadmin} , message: "Tokens refreshed", status: 200};
   } catch (error) {
     return { success: null, user: null, message: "Invalid refresh token", status: 400 };
   }
