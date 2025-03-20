@@ -8,7 +8,9 @@ export const authConfig: AuthOptions = {
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID!,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            authorization: 'https://accounts.google.com/o/oauth2/v2/auth',
           }),
+
     ],
     callbacks: {
         async jwt({token, user}: { token: JWT; user?: any}) {
