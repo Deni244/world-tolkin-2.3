@@ -5,6 +5,8 @@ import { BooksProps } from "@/types";
 export async function GetBooks() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books`,{
       method: 'GET',
+      //next: {revalidate: 60}
+      cache: "no-store"
     });
     const books = await res.json();
     return books;

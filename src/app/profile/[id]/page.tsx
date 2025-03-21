@@ -22,11 +22,7 @@ export default async function Post({ params }: PageProps) {
         <h1 className='user-page-title'>Такого користувача не існує!</h1>
         <Button1 title="На Головну"  href='/' clas="button-global"/>
       </div>
-    }
-    const name = user.name.split(" ");
-    console.log(name[0]);
-    console.log(name[1]);
-    
+    }    
     return (
       <>
       <h1 className='user-page-title'>{`${(user.name).toUpperCase()} ${user.isadmin ? '(Admin)': ''}`}</h1>

@@ -23,22 +23,19 @@ export default function Book(book: BooksProps) {
             <div className="image-book-cnt">
                 <img src={book.photo} alt="Фото книги" className="image-book" />
                 <span>{`Ціна: ${book.price} $`}</span>
-                < Button1 clas="button-global" title="В корзину" />
-            </div>
-            <div className="name-description-cnt">
-                <div className="name-book-cnt">
-                    <Link href={`/books/${book.name}`} className="name-book">{book.name}</Link>
+                <h2  className="name-book">{book.name}</h2>
+                < Button1 clas="basket-button" title="В корзину" />
                 </div>
-                <div className="description-book-cnt">
-                    <p className="description-book">{book.description}</p><Link href={`/books/${book.name}`}>Детальніше</Link>
-                </div>
+
+           
                 {
-                    user?.isadmin && <div className="book-button_container">
-                    < Button1 clas="button-global" title="Видалити" onClick={()=>handleDeleBook(book.id!) } />
-                    < Button1 clas="button-global" title="Змінити" />
+                    user?.isadmin &&  <div className="book-admin-panel">
+                    < Button1 clas="button-book-admin" title="Видалити" onClick={()=>handleDeleBook(book.id!) } />
+                    < Button1 clas="button-book-admin" title="Редагувати" />
                     </div>
-                }
-            </div>
+                }    
+            
+            
         </div>
         </>
     )

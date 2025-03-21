@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       const filePath = path.join(process.cwd(), 'src/data', 'books.json');
       try {
         const jsonData = fs.readFileSync(filePath, 'utf-8');
-        const books = JSON.parse(jsonData);
+        let books = JSON.parse(jsonData);
         const bookIndex = books.findIndex((book: BooksProps) => book.id === id);
         
         if (bookIndex === -1) {
@@ -46,6 +46,11 @@ export async function POST(req: NextRequest) {
       fs.unlinkSync(imagePath);
     }
         await books.splice(bookIndex, 1);
+        console.log(books);
+        books.map((book: BooksProps, index: number) => {
+          book.id = (index + 1).toString();
+        });
+        console.log(books);
         
         fs.writeFileSync(filePath, JSON.stringify(books, null, 2), 'utf-8');
         return NextResponse.json({succes: 'true', message: 'Книга успішно видалена!'});
