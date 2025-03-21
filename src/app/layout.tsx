@@ -7,6 +7,7 @@ import ModalWindow from "@/components/modalWindow";
 import { getUser } from "@/lib/authAction";
 import "./layout.css";
 import { kurale, yesevaOne, rubikDirt } from "@/lib/fonts";
+import Head from "next/head";
 
 
 export const metadata: Metadata = {
@@ -26,6 +27,10 @@ export default async function RootLayout({
   
   return (
     <html lang="en" className={`${kurale.variable} ${yesevaOne.variable} ${rubikDirt.variable}`}>
+       <Head>
+        <link rel="icon" href="favicon.ico" />
+        {children}
+        </Head>
       <AuthProvider>
         <body >
           <Header />
