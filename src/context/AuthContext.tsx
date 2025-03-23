@@ -49,7 +49,6 @@ export function AuthProvider ({ children }: { children: React.ReactNode}) {
         async function loadUser() {
           const result = await getUser();
           if (result?.success) {
-            console.log(`Спацював useEffect ${result.user?.isadmin}`);
             setUser(result.user);
             await refresh();
           }

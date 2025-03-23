@@ -16,8 +16,9 @@ return (
         <Button1 
         title={content?.buttonText}
         href={content?.buttonLink}
-        onClick={content?.onConfirm && closeModal}
+        onClick={content?.onConfirm ? content.onConfirm : closeModal}
         clas='button-global' />
+       {content?.abolition ? <Button1 title='Скасувати' clas='button-global' onClick={closeModal} /> : null}
     </div>
 )
 }

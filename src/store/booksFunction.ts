@@ -15,6 +15,7 @@ export async function GetBooks() {
 export async function GetOneBook(name: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${name}`,{
     method: 'GET',
+    cache: "no-store"
   });
   const data = await res.json()
   return data;

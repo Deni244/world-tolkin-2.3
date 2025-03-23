@@ -6,6 +6,7 @@ type Content ={
     description?: string;
     buttonText?: string;
     buttonLink?: string;
+    abolition?: boolean;
     onConfirm?: () => void; 
 };
 
