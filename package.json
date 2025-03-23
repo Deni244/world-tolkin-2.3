@@ -14,7 +14,7 @@
     "jsonwebtoken": "^9.0.2",
     "jwt-decode": "^4.0.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "next": "^15.1.7",
+    "next": "^15.2.3",
     "next-auth": "^4.24.11",
     "pg": "^8.13.3",
     "react": "^19.0.0",

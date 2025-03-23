@@ -4,7 +4,6 @@ import Button1 from "./button1"
 import { useAuth } from "@/context/AuthContext"
 import { deleteBook } from "@/store/booksFunction"
 import { useModalStore } from "@/store/ModalWindowState"
-
 import '@/styles/book.css'
 import Link from "next/link"
 
