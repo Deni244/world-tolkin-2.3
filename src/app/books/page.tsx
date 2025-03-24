@@ -2,8 +2,7 @@
 import { GetBooks } from '@/store/booksFunction';
 import { Metadata } from 'next';
 import { BooksProps } from "@/types";
-import Book from '@/components/book';
-import '@/styles/Books.css'
+import BookCard from '@/components/Books/bookCard';
 
 
 export const metadata: Metadata = {
@@ -18,7 +17,7 @@ export default async function BooksPage() {
                               
             {
                 books.map((book: BooksProps) => (
-                    <Book key={book.id}
+                    <BookCard key={book.id}
                     id={book.id}
                     name={book.name}
                     description={book.description}

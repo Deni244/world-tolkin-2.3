@@ -1,9 +1,56 @@
-
-.cnt-contein-books {
-    width: 100%;
+.container-book {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     position: relative;
-    flex-wrap: wrap;
     z-index: 1;
+    width: 90%;
+    margin-top: 10px;
+    border: 2px solid rgb(107, 107, 107);
+    border-radius: 10px;
+    margin: 0 auto;
+}
+.image-nav-book-cnt {
+    display: flex;
+    text-align: center;
+    justify-content: space-between;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    gap: 5px;
+}
+.image-nav-book-cnt span {
+    font-size: 20px;
+    color: white;
+}
+.image-book {
+    height: 235px;
+}
+.nav-book-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+.name-book {
+    text-align: center;
+    margin: 0 3px 0 3px;
+    font-size: 30px;
+    color: rgb(45, 174, 174);
+}
+.description-book-cnt {
+    background-color: rgb(52, 52, 52);
+    border-radius: 10px;
+    color: rgb(209, 209, 209);
+    font-size: 20px;
+    margin: 0 10px 10px 10px;
+    padding: 10px;
+}
+
+@media (max-width:650px){
+    .image-nav-book-cnt {
+        flex-direction: column;
+        align-items: center;
+    }
+
 }

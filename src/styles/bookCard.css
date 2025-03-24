@@ -1,0 +1,44 @@
+.cnt-contein-books {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    flex-wrap: wrap;
+    z-index: 1;
+}
+.book-cnt {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-family: var(--font-kurale), sans-serif;
+    margin: 10px;
+    width: 250px;
+    border: 2px solid black;
+    background-color: rgba(52, 52, 52, 0.64);
+    border-radius: 20px;
+}
+.image-books-cnt {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    min-width: 180px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    flex-grow: 1;
+    gap: 5px;
+}
+.image-books-cnt span {
+    color: white;
+}
+
+.image-book {
+   height: 235px;
+}
+.name-book {
+    text-align: center;
+    margin: 0 3px 0 3px;
+    font-size: 20px;
+    color: rgb(45, 174, 174);
+}

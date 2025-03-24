@@ -1,0 +1,17 @@
+.book-admin-panel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 250px;
+    height: 50px;
+}
+.button-book-admin {
+    font-size: 19px;
+    height: 30px;
+    padding: 0 5px 0 5px;
+    line-height: 30px;
+    color: rgb(209, 209, 209);
+    background-color: #830000;
+    border-radius: 5px;
+    cursor: pointer;
+}
