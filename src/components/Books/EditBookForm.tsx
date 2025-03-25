@@ -4,7 +4,7 @@ import { useModalState } from "@/store/ModalState";
 import { BooksProps } from "@/types";
 import { useForm } from "@/customHooks/useForm";
 import '../../styles/EditBookForm.css'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function EditBookForm({book}:{book: BooksProps}) {
@@ -24,6 +24,14 @@ export default function EditBookForm({book}:{book: BooksProps}) {
         },
         {}
       );
+      useEffect(() => {
+        setFormData({
+          name: book.name,
+          description: book.description,
+          price: book.price,
+          photo: book.photo,
+        });
+      }, [book, setFormData]);
 //Функція обробки форми
     const handleSubmit = async ()=>{
 
@@ -121,7 +129,9 @@ const handleInputPhoto = (e: React.ChangeEvent<HTMLInputElement>)=>{
                         onChange={handleInputPhoto}
                     />
                 <button className="button-book-admin" type="submit">Зберегти Зміни</button>
+                
             </form>
+            <button className="btn-edit-book-cansel button-global" onClick={()=>{resetForm();closeModalState();}}>Скасувати Зміни</button>
         </div>
     )
 }

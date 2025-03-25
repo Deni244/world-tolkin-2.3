@@ -5,10 +5,10 @@ import EditBooksButtons from "@/components/Books/EditBooksButtons"
 import Button1 from "@/components/button1"
 import '@/styles/bookCard.css'
 
-export default function BookCard(book: BooksProps) {
+export default function BookCard({ book, onEdit }: { book: BooksProps; onEdit: (id: number) => void }) {
     return (
         <>
-        <div className="book-cnt">
+        <div className="book-cnt" onClick={()=>onEdit(Number(book.id))}>
             <Link href={`/books/${book.name}`} className="image-books-cnt">
                 <img src={book.photo} alt="Фото книги" className="image-book" />
                 <span>{`Ціна: ${book.price} $`}</span>
