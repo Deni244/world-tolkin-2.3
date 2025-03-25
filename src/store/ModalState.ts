@@ -1,6 +1,7 @@
 'use client'
 import {create} from 'zustand';
-type ModalType = "login" | "burgerMenu" | null;
+type ModalType = "login" | "burgerMenu" | 'editBook' | null;
+
 interface ModalState {
     isopenModal: ModalType;
     openModalState: (modal: ModalType) => void;

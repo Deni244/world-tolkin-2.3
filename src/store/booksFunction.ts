@@ -40,7 +40,6 @@ export async function addBook(book: BooksProps) {
   }
 
   export async function deleteBook(id: string) {
-    console.log(`deleteBook: ${id}`);
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books`, {
       method: 'DELETE',
       headers: {
@@ -48,6 +47,24 @@ export async function addBook(book: BooksProps) {
       },
       body: JSON.stringify({
           id: id
+      }),
+    })
+    const result = await res.json();
+    return result;
+  }
+
+  export async function editBook(book: BooksProps) {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${book.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        id: book.id,
+        name: book.name,
+        description: book.description,
+        photo: book.photo,
+        price: book.price
       }),
     })
     const result = await res.json();

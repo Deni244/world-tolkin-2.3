@@ -15,8 +15,7 @@ export default function BookCard(book: BooksProps) {
                 <h2  className="name-book">{book.name}</h2>
                 < Button1 clas="basket-button" title="В корзину" />
             </Link>
-            <EditBooksButtons id={book.id!} />
-              
+            <EditBooksButtons book={book} />
         </div>
         </>
     )

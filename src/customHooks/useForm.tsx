@@ -7,10 +7,17 @@ const useForm = <T extends Record<string, any>>(initialState: T, validators: Par
     const [formData, setFormData] = useState<T>(initialState);
     const [errors, setErrors] = useState<Errors<T>>({});
 //Функція збереження даних з input полів
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement> ) => {
-      const { name, type, value } = e.target as HTMLInputElement;
-      
-      let newValue = type === "radio" ? value : value;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement> ) => {
+      const target = e.target as HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+      const { name, type, value } = target;
+      let newValue: string | globalThis.File | null = type === "radio" ? value : value;
+
+      if(type === "radio") newValue = value;
+
+      if (type === "file" && target instanceof HTMLInputElement && target.files) {
+        newValue = target.files && target.files.length > 0 ? target.files[0] : null;
+      }
+
       setFormData((prev) => ({
         ...prev,
         [name]: newValue,
@@ -31,6 +38,6 @@ const useForm = <T extends Record<string, any>>(initialState: T, validators: Par
       setFormData(initialState);
       setErrors({});
     };
-    return { formData, handleChange, resetForm, errors, validateFormReg };
+    return { formData, handleChange, resetForm, errors, validateFormReg, setFormData };
 }
 export {useForm}
