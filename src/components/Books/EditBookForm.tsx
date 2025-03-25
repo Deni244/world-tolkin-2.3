@@ -4,12 +4,13 @@ import { useModalState } from "@/store/ModalState";
 import { BooksProps } from "@/types";
 import { useForm } from "@/customHooks/useForm";
 import '../../styles/EditBookForm.css'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 export default function EditBookForm({book}:{book: BooksProps}) {
     const {isopenModal, closeModalState} = useModalState();
     const [error, setError] = useState<string | null>(null);
+    const formRef = useRef<HTMLFormElement>(null);
     const { formData, handleChange, resetForm, errors, validateFormReg, setFormData } = useForm<{
         name: string;
         description: string;
@@ -24,6 +25,7 @@ export default function EditBookForm({book}:{book: BooksProps}) {
         },
         {}
       );
+//Еффект для зміни вхідного параметра book(для сторінки \Books)
       useEffect(() => {
         setFormData({
           name: book.name,
@@ -32,6 +34,15 @@ export default function EditBookForm({book}:{book: BooksProps}) {
           photo: book.photo,
         });
       }, [book, setFormData]);
+//Еффект для переходу до форми після відкриття
+      useEffect(() => {
+        if (isopenModal === "editBook" && formRef.current) {
+          formRef.current.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }, [isopenModal, {book}]);
 //Функція обробки форми
     const handleSubmit = async ()=>{
 
@@ -76,13 +87,14 @@ const handleInputPhoto = (e: React.ChangeEvent<HTMLInputElement>)=>{
             setError('Це не фото!');
           }
     }
+   
 
     
     if (isopenModal !== "editBook") return null;
 
     return (
         <div className="form-edit-book-container">
-            <form className="form-edit-book" onChange={handleSubmit}>
+            <form ref={formRef} className="form-edit-book" onChange={handleSubmit}>
                 <label>Назва книги:</label>
                 <input 
                     id="form-name-book" 
