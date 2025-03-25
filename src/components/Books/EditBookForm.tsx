@@ -4,13 +4,15 @@ import { useModalState } from "@/store/ModalState";
 import { BooksProps } from "@/types";
 import { useForm } from "@/customHooks/useForm";
 import '../../styles/EditBookForm.css'
-import { useEffect, useRef, useState } from "react";
+import { FormEventHandler, useEffect, useRef, useState } from "react";
+import { useModalStore } from "@/store/ModalWindowState";
 
 
 export default function EditBookForm({book}:{book: BooksProps}) {
     const {isopenModal, closeModalState} = useModalState();
     const [error, setError] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
+    const {openModal}=useModalStore()
     const { formData, handleChange, resetForm, errors, validateFormReg, setFormData } = useForm<{
         name: string;
         description: string;
@@ -44,8 +46,9 @@ export default function EditBookForm({book}:{book: BooksProps}) {
         }
       }, [isopenModal, {book}]);
 //Функція обробки форми
-    const handleSubmit = async ()=>{
-
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault()
+        openModal({title: 'Вітаю ви зберегли зміни! ахах жартую не зберегли, реалізації на збереження немає, зате ви бачите це повідомлення))'})
     }
 //Функції події перетягування елемента
     const handleDrop = async (e: React.DragEvent<HTMLDivElement>)=>{
@@ -94,7 +97,7 @@ const handleInputPhoto = (e: React.ChangeEvent<HTMLInputElement>)=>{
 
     return (
         <div className="form-edit-book-container">
-            <form ref={formRef} className="form-edit-book" onChange={handleSubmit}>
+            <form ref={formRef} className="form-edit-book" onSubmit={handleSubmit}>
                 <label>Назва книги:</label>
                 <input 
                     id="form-name-book" 

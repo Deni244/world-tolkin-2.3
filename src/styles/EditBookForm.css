@@ -49,6 +49,7 @@
     border: 2px solid black;
     border-radius: 5px;
     min-height: 100px;
+    padding: 5px;
 }
 .btn-edit-book-cansel {
     width: 160px;
@@ -65,4 +66,12 @@
 }
 #previewImage {
     width: 100px;
+}
+@media (max-width: 364px){
+    .drop-photo-book {
+        width: 220px;
+    }
+    .form-description-book {
+        width: 100%;
+    }
 }

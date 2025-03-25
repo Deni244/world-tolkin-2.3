@@ -6,7 +6,7 @@
     position: fixed;
     z-index: 100;
     width: 80%;
-    height: 200px;
+    min-height: 200px;
     background-color:white;
     border-radius: 20px;
     border: 2px solid white;
@@ -21,11 +21,11 @@
     text-align: center;
     margin: 5px;
 }
-@media (max-width: 480px){
+/* @media (max-width: 480px){
     .modal-window-container{
         top: calc(100vh - 25%);
     }
-}
+} */
 
 
 
