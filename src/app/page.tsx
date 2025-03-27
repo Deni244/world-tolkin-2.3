@@ -1,7 +1,7 @@
 import '@/styles/home.css'
 import { kurale } from '@/lib/fonts';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="content-head-page">
       <h1 className ={`${kurale.className} content-head-page-title`}>

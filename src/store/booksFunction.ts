@@ -53,20 +53,21 @@ export async function addBook(book: BooksProps) {
     return result;
   }
 
-  export async function editBook(book: BooksProps) {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${book.id}`, {
+  export async function editBook(book: Omit<BooksProps, 'photo'> & {photo: string | File;}) {
+    const formData = new FormData();
+    formData.append('id', book.id!);
+    formData.append('name', book.name);
+    formData.append('description', book.description);
+    formData.append('price', book.price);
+    formData.append('photo', book.photo);
+    console.log(formData);
+    
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books`, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        id: book.id,
-        name: book.name,
-        description: book.description,
-        photo: book.photo,
-        price: book.price
-      }),
+      body: formData,
     })
+    console.log(res);
+    
     const result = await res.json();
     return result;
   }

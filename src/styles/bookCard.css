@@ -33,8 +33,11 @@
     color: white;
 }
 
-.image-book {
-   height: 235px;
+.image-book-card {
+    object-fit: cover;
+    object-position: center;
+    height: 235px;
+    max-width: 163px;
 }
 .name-book {
     text-align: center;

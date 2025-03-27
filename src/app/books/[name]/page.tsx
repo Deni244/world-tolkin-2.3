@@ -11,7 +11,6 @@ type PageProps = {
 export default async function NameBook({params}: PageProps) {
     const {name} = await params;
     const decodeName = decodeURIComponent(name)
-    console.log(decodeName);
     
     const book = await GetOneBook(decodeName);
     return (

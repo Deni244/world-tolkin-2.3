@@ -24,6 +24,8 @@
     color: white;
 }
 .image-book {
+    object-fit: cover;
+    object-position: center;
     height: 235px;
 }
 .nav-book-container {

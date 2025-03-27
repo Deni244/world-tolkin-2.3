@@ -133,7 +133,7 @@ export async function getUser() {
     let decoded = jwt.verify(refreshToken, REFRESH_SECRET) as { id: number; email: string; name: string, isadmin: boolean };
     return {success: true, user: {id: decoded.id, name: decoded.name, email: decoded.email, isadmin: decoded.isadmin }, status: 200 };
   } catch {
-    return null;
+    return {success: false, user: null, message: "Refresh token not found", status: 401 };
   }
 }
 

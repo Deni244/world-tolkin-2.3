@@ -6,6 +6,7 @@ import { useForm } from "@/customHooks/useForm";
 import '../../styles/EditBookForm.css'
 import { FormEventHandler, useEffect, useRef, useState } from "react";
 import { useModalStore } from "@/store/ModalWindowState";
+import { editBook } from "@/store/booksFunction";
 
 
 export default function EditBookForm({book}:{book: BooksProps}) {
@@ -14,12 +15,14 @@ export default function EditBookForm({book}:{book: BooksProps}) {
     const formRef = useRef<HTMLFormElement>(null);
     const {openModal}=useModalStore()
     const { formData, handleChange, resetForm, errors, validateFormReg, setFormData } = useForm<{
+        id: string;
         name: string;
         description: string;
         price: string;
         photo: string | File;
       }>(
         {
+          id: book.id!,
           name: book.name,
           description: book.description,
           price: book.price,
@@ -30,6 +33,7 @@ export default function EditBookForm({book}:{book: BooksProps}) {
 //Еффект для зміни вхідного параметра book(для сторінки \Books)
       useEffect(() => {
         setFormData({
+          id: book.id!,
           name: book.name,
           description: book.description,
           price: book.price,
@@ -48,7 +52,11 @@ export default function EditBookForm({book}:{book: BooksProps}) {
 //Функція обробки форми
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault()
-        openModal({title: 'Вітаю ви зберегли зміни! ахах жартую не зберегли, реалізації на збереження немає, зате ви бачите це повідомлення))'})
+        const res = await editBook(formData);
+        if(res.succes){
+          openModal({title: `${res.message} перезавантажте сторінку щоб дані оновились`, buttonText: 'Пезезавантажити', onConfirm: ()=>window.location.reload()})
+        }else
+        openModal({title: `Щось пішло не так: ${res.message}`})
     }
 //Функції події перетягування елемента
     const handleDrop = async (e: React.DragEvent<HTMLDivElement>)=>{

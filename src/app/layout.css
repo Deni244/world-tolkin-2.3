@@ -69,4 +69,5 @@ main {
   align-items: center;
   position: relative;
   z-index: 1;
+  gap: 10px;
 }
