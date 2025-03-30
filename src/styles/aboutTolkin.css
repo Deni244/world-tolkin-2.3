@@ -25,7 +25,7 @@
 .content-title {
     position: relative;
     margin-top: 25px;
-    font-family: var(--font-kurale), sans-serif;
+    font-family: sans-serif;
     font-size: 35px;
     color: rgb(45, 174, 174);
     text-align: center;
@@ -34,7 +34,7 @@
 .content-description {
     display: block;
     width: 95%;
-    font-family: var(--font-kurale), sans-serif;
+    font-family: sans-serif;
     font-size: 20px;
     margin-bottom: 25px;
     color: #ccd0cf;

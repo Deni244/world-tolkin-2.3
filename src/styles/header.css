@@ -17,7 +17,7 @@ header {
 }
 
 .logo {
-    font-family: var(--font-rubik), sans-serif;
+    font-family: sans-serif;
     font-size: 30px;
     color: white;
     font-weight: normal;
@@ -44,7 +44,7 @@ header {
     border-radius: 5px;
 }
 .nav-link-li-a {
-    font-family: var(--font-kurale), sans-serif;
+    font-family: sans-serif;
     position: relative;
     font-size: 19px;
     color: rgb(209, 209, 209);

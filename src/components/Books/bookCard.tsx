@@ -12,7 +12,7 @@ export default function BookCard({ book, onEdit }: { book: BooksProps; onEdit: (
             <Link href={`/books/${book.name}`} className="image-books-cnt">
                 <img src={book.photo} alt="Фото книги" className="image-book-card" />
                 <span>{`Ціна: ${book.price} $`}</span>
-                <h2  className="name-book">{book.name}</h2>
+                <h2  className="name-books">{book.name}</h2>
                 < Button1 clas="basket-button" title="В корзину" />
             </Link>
             <EditBooksButtons book={book} />

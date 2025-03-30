@@ -5,9 +5,6 @@ import { useState } from "react";
 import EditBookForm from "./EditBookForm";
 import BookCard from "./bookCard";
 
-
-
-
 export default function Books({books}:{ books: BooksProps[]}) {
     const [selectBook, setSelectBook] = useState(books[0])
     const handleEditClick = (id: number) => {

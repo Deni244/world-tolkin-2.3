@@ -4,9 +4,7 @@ import Header from "@/components/Header";
 import BurgerMenu from "@/components/burgerMenu";
 import LogIn from "@/components/logIn";
 import ModalWindow from "@/components/modalWindow";
-import { getUser } from "@/lib/authAction";
-import "./layout.css";
-import { kurale, yesevaOne, rubikDirt } from "@/lib/fonts";
+import "./global.scss";
 import Head from "next/head";
 
 
@@ -22,7 +20,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kurale.variable} ${yesevaOne.variable} ${rubikDirt.variable}`}>
+    <html lang="en">
        <Head>
         <link rel="icon" href="favicon.ico" />
         {children}

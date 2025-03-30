@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    font-family: var(--font-kurale), sans-serif;
+    font-family: sans-serif;
     margin: 10px;
     width: 250px;
     border: 2px solid black;
@@ -39,7 +39,7 @@
     height: 235px;
     max-width: 163px;
 }
-.name-book {
+.name-books {
     text-align: center;
     margin: 0 3px 0 3px;
     font-size: 20px;

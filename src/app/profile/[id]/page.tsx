@@ -17,7 +17,7 @@ async function getUserFromBD(id: string) {
 
 export default async function Post({ params }: PageProps) {
   const res = await getUser();
-  if(!res.user) {
+  if(!res.user) { 
     return <div className='div-container'>
     <h1 className='user-page-title'>Щоб переглядати користувачів зареєструйтесь або авторизуйтесь</h1>
     <Button1 title="реєстрація"  href='/registration' clas="button-global"/>

@@ -1,0 +1,23 @@
+%button-style {
+    font-size: 19px;
+    height: 30px;
+    padding: 0 5px 0 5px;
+    line-height: 30px;
+    color: rgb(209, 209, 209);
+    border-radius: 5px;
+    cursor: pointer;
+  }
+.button-book-admin {
+    @extend %button-style;
+    background-color: #830000;
+}
+  
+.button-global {
+    @extend %button-style;
+    background-color: rgb(0, 131, 131);
+  
+  }
+.basket-button {
+    @extend %button-style;
+    background-color: rgb(130, 205, 50);
+  }

@@ -1,5 +1,6 @@
 'use client'
 import Link from "next/link";
+import '@/styles/button1.scss'
 import { kurale } from '@/lib/fonts';
 type Props = {
         title?: string;
