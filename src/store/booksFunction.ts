@@ -8,6 +8,7 @@ export async function GetBooks() {
       next: {revalidate: 60}
     //cache: 'no-cache'
     });
+    if (!res.ok) throw new Error('Неправильний фетч')
     const books = await res.json();
     return books;
   }
@@ -18,6 +19,7 @@ export async function GetOneBook(name: string) {
     next: {revalidate: 60}
     //cache: "no-store"
   });
+  if (!res.ok) throw new Error('Неправильний фетч')
   const data = await res.json()
   return data;
 

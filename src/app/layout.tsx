@@ -5,12 +5,15 @@ import BurgerMenu from "@/components/burgerMenu";
 import LogIn from "@/components/logIn";
 import ModalWindow from "@/components/modalWindow";
 import "./global.scss";
-import Head from "next/head";
+
 
 
 export const metadata: Metadata = {
   title: "Світ Толкіна",
   description: "Світ Толкіна",
+  icons: {
+    icon: '/favicon.ico',
+  },
   
 };
 
@@ -21,10 +24,6 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-       <Head>
-        <link rel="icon" href="favicon.ico" />
-        {children}
-        </Head>
       <AuthProvider>
         <body >
           <Header />

@@ -36,6 +36,7 @@
 }
 .name-book {
     text-align: center;
+    font-weight: 600;
     margin: 0 3px 0 3px;
     font-size: 30px;
     color: rgb(45, 174, 174);

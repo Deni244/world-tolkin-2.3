@@ -17,11 +17,24 @@ body {
   position: relative;
   width: 100%;
   min-height: 100vh;
+  background: linear-gradient(185deg, rgb(41, 41, 41), rgb(0, 131, 131));
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  max-width: 1440px;
+  height: 100%;
   background-image: url('../../public/Backgroudn.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-attachment:fixed;
+  background-attachment: fixed;
+  transform: translateX(-50%);
+  z-index: -2;
 }
 body::after {
   content: "";
@@ -36,9 +49,11 @@ body::after {
   opacity: .7;
   transition: all .25s ease;
 }
+
 main {
   width: 100%;
   max-width: 1440px;
+  margin-top: 75px;
 }
 .div-container{
   display: flex;
