@@ -1,35 +1,45 @@
-
 import EditBookForm from "@/components/Books/EditBookForm";
 import EditBooksButtons from "@/components/Books/EditBooksButtons";
 import Button1 from "@/components/button1";
 import { GetOneBook } from "@/store/booksFunction";
 import '@/styles/Books.css'
+import { kurale } from "@/lib/fonts";
+
 
 type PageProps = {
     params: Promise<{ name: string }>,
 }
+
+export async function generateMetadata({ params }: PageProps) {
+    const { name } = await params;
+    const decodeName = decodeURIComponent(name)
+    const title = decodeName;
+  const description = `Книга: ${decodeName}`;
+  return {
+    title, description
+  }
+}
+
+
 export default async function NameBook({params}: PageProps) {
     const {name} = await params;
-    const decodeName = decodeURIComponent(name)
-    
-    const book = await GetOneBook(decodeName);
+    const book = await GetOneBook(name);
+    if (!book) return <div className="container-book"><h1 className={`name-book ${kurale.className}`}>Такої книги немає</h1></div>
     return (
         <>
             <div className="container-book">
                 <div className="image-nav-book-cnt">
                     <img className="image-book" src={book.photo} />
                     <div className="nav-book-container">
-                        <h1 className="name-book">{book.name}</h1>
-                        <span>{`Ціна: ${book.price}$`}</span>
+                        <h1 className={`name-book ${kurale.className}`}>{book.name}</h1>
+                        <span className={kurale.className}>{`Ціна: ${book.price}$`}</span>
                         < Button1 clas="basket-button" title="В корзину" />
                         <EditBooksButtons book={book} />
                     </div>
                 </div>
-                <p className="description-book-cnt">{book.description}</p>
+                <p className={`description-book-cnt ${kurale.className}`}>{book.description}</p>
             </div>
             <EditBookForm book={book} />
         </>
     )
-
-
 }

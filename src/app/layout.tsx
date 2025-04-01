@@ -4,15 +4,16 @@ import Header from "@/components/Header";
 import BurgerMenu from "@/components/burgerMenu";
 import LogIn from "@/components/logIn";
 import ModalWindow from "@/components/modalWindow";
-import { getUser } from "@/lib/authAction";
-import "./layout.css";
-import { kurale, yesevaOne, rubikDirt } from "@/lib/fonts";
-import Head from "next/head";
+import "./global.scss";
+
 
 
 export const metadata: Metadata = {
   title: "Світ Толкіна",
   description: "Світ Толкіна",
+  icons: {
+    icon: '/favicon.ico',
+  },
   
 };
 
@@ -22,11 +23,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${kurale.variable} ${yesevaOne.variable} ${rubikDirt.variable}`}>
-       <Head>
-        <link rel="icon" href="favicon.ico" />
-        {children}
-        </Head>
+    <html lang="en">
       <AuthProvider>
         <body >
           <Header />

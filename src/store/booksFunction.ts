@@ -5,9 +5,10 @@ import { BooksProps } from "@/types";
 export async function GetBooks() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books`,{
       method: 'GET',
-      //next: {revalidate: 60}
-      cache: "no-store"
+      next: {revalidate: 60}
+    //cache: 'no-cache'
     });
+    if (!res.ok) throw new Error('Неправильний фетч')
     const books = await res.json();
     return books;
   }
@@ -15,8 +16,10 @@ export async function GetBooks() {
 export async function GetOneBook(name: string) {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/books/${name}`,{
     method: 'GET',
-    cache: "no-store"
+    next: {revalidate: 60}
+    //cache: "no-store"
   });
+  if (!res.ok) throw new Error('Неправильний фетч')
   const data = await res.json()
   return data;
 
