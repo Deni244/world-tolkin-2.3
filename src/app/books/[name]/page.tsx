@@ -2,6 +2,7 @@ import EditBookForm from "@/components/Books/EditBookForm";
 import EditBooksButtons from "@/components/Books/EditBooksButtons";
 import Button1 from "@/components/button1";
 import { GetOneBook } from "@/store/booksFunction";
+import Image from "next/image";
 import '@/styles/Books.css'
 import { kurale } from "@/lib/fonts";
 
@@ -29,7 +30,13 @@ export default async function NameBook({params}: PageProps) {
         <>
             <div className="container-book">
                 <div className="image-nav-book-cnt">
-                    <img className="image-book" src={book.photo} />
+                    <Image 
+                        className="image-book" 
+                        src={book.photo}
+                        alt={book.name}
+                        height={300}
+                        width={200}
+                     />
                     <div className="nav-book-container">
                         <h1 className={`name-book ${kurale.className}`}>{book.name}</h1>
                         <span className={kurale.className}>{`Ціна: ${book.price}$`}</span>

@@ -1,0 +1,21 @@
+.basket-button, .button-global, .button-book-admin {
+  font-size: 19px;
+  height: 30px;
+  padding: 0 5px 0 5px;
+  line-height: 30px;
+  color: rgb(209, 209, 209);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button-book-admin {
+  background-color: #830000;
+}
+
+.button-global {
+  background-color: rgb(0, 131, 131);
+}
+
+.basket-button {
+  background-color: rgb(130, 205, 50);
+}/*# sourceMappingURL=button1.css.map */

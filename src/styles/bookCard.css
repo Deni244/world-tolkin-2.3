@@ -23,6 +23,7 @@
     align-items: center;
     text-align: center;
     justify-content: space-between;
+    width: 100%;
     min-width: 180px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -37,7 +38,7 @@
     object-fit: cover;
     object-position: center;
     height: 235px;
-    max-width: 163px;
+    width: auto;
 }
 .name-books {
     text-align: center;
