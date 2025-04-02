@@ -21,7 +21,7 @@ export default function Navigation() {
             {
                 navItems.map(item =>(
                     <li key={item.id} className="nav-link-li">
-                        <Button1 title={item.title} clas={`${pathName === item.path && 'activeLink' } nav-link-li-a ${kurale.className}`} href={item.path}/>
+                        <Button1 title={item.title} clas={`${pathName === item.path && 'activeLink' } nav-link-li-a`} href={item.path}/>
                     </li>
                 ))
             }
