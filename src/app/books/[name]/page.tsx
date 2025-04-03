@@ -13,6 +13,7 @@ type PageProps = {
 
 export async function generateMetadata({ params }: PageProps) {
     const { name } = await params;
+    console.log(`Параметр мета дати ${name}`);
     const decodeName = decodeURIComponent(name)
     const title = decodeName;
   const description = `Книга: ${decodeName}`;
@@ -23,9 +24,10 @@ export async function generateMetadata({ params }: PageProps) {
 
 
 export default async function NameBook({params}: PageProps) {
-    const {name} = await params;
-    const book = await GetOneBook(name);
-    if (!book) return <div className="container-book"><h1 className={`name-book ${kurale.className}`}>Такої книги немає</h1></div>
+    const {name} = await params; 
+    const data = await GetOneBook(name);
+    const book = data.book;
+    if(book === null)  {return <div className="container-book"><h1 className={`name-book ${kurale.className}`}>Книгу не знайдено</h1></div>}
     return (
         <>
             <div className="container-book">

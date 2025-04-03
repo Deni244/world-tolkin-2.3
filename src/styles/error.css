@@ -1,0 +1,18 @@
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    text-align: center;
+    margin-top: 20px;
+    z-index: 1;
+    gap: 10px;
+    color: white;
+}
+.title-error {
+    color: red;
+}
+.error-message {
+    max-width: 90%;
+}

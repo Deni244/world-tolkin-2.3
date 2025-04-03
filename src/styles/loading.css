@@ -1,0 +1,25 @@
+@keyframes colorChange {
+    0% {
+      color: #007bff;
+    }
+    50% {
+      color: #ff5733;
+    }
+    100% {
+      color: #007bff;
+    }
+  }
+  
+  .loading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    font-size: 2rem;
+    font-weight: bold;
+    animation: colorChange 2s infinite ease-in-out;
+    margin-top: 10px;
+  }

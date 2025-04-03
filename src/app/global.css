@@ -3,16 +3,13 @@
   padding: 0;
   border: 0;
 }
-
 ul {
   list-style-type: none;
 }
-
 a {
   text-decoration: none;
   color: inherit;
 }
-
 body {
   display: flex;
   flex-direction: column;
@@ -31,7 +28,7 @@ body::before {
   width: 100%;
   max-width: 1440px;
   height: 100%;
-  background-image: url("../../public/Backgroudn.webp");
+  background-image: url('../../public/Backgroudn.webp');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -39,7 +36,6 @@ body::before {
   transform: translateX(-50%);
   z-index: -2;
 }
-
 body::after {
   content: "";
   background: rgb(52, 52, 52);
@@ -50,8 +46,8 @@ body::after {
   left: 0;
   height: 100%;
   width: 100%;
-  opacity: 0.7;
-  transition: all 0.25s ease;
+  opacity: .7;
+  transition: all .25s ease;
 }
 
 main {
@@ -59,8 +55,7 @@ main {
   max-width: 1440px;
   margin-top: 75px;
 }
-
-.div-container {
+.div-container{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -68,4 +63,4 @@ main {
   position: relative;
   z-index: 1;
   gap: 10px;
-}/*# sourceMappingURL=global.css.map */
+}

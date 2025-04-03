@@ -5,9 +5,10 @@ import { useForm } from "@/customHooks/useForm";
 import { User } from "@/types";
 import { validateFormFun } from "@/store/validateFormFunction";
 import { useModalStore } from "@/store/ModalWindowState";
-import '../../styles/formRegistry.css'
 import Button1 from "@/components/button1";
 import { signIn } from "next-auth/react";
+
+import '../../styles/formRegistry.css'
 
 export default function Registration() {
     const {registry} = useAuth();

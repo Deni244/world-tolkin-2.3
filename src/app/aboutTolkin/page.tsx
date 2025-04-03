@@ -1,8 +1,8 @@
 import {tolkinBiography} from '@/data/aboutTolkin'
-import '@/styles/aboutTolkin.css'
 import { kurale } from '@/lib/fonts';
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import '@/styles/aboutTolkin.css'
 export const metadata: Metadata = {
     title: "Про Толкіна",
     description: "Про Толкіна, дитинство Толкіна, шкільні та університетські роки",

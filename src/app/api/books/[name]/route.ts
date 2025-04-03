@@ -10,18 +10,17 @@ type PageProps = {
 export async function GET(req: NextRequest, { params }: PageProps) {
   try {
       const {name} = await params;
-      const decodeName = decodeURIComponent(name)
+      const decodeName = decodeURIComponent(name); 
     const jsonData = fs.readFileSync(filePath, 'utf-8');
     const books = JSON.parse(jsonData);
     const book = books.find((b: BooksProps) => b.name.toLowerCase() === decodeName.toLowerCase());
     if (book) {
-      return NextResponse.json(book);
+      return NextResponse.json({book: book});
     } else {
-      return NextResponse.json({ message: 'Book not found' }, { status: 404 });
+      return NextResponse.json({book: null, message: 'Book not found' }, { status: 404 });
     }
   } catch (error) {
-    console.error('Error in GET handler:', error);
-    return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+    return NextResponse.json({book: null, message: `Internal Server Error ${error}` }, { status: 500 });
   }
 }
 

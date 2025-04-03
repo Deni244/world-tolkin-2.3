@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import BurgerMenu from "@/components/burgerMenu";
 import LogIn from "@/components/logIn";
 import ModalWindow from "@/components/modalWindow";
-import "./global.scss";
+import "./global.css";
 
 
 
