@@ -1,10 +1,16 @@
 .form-registry-container {
     display: flex;
     justify-content: center;
+    flex-direction: column;
     align-items: center;
     position: relative;
     z-index: 1;
+    color: white;
 }
+.form-registry-container h1 {
+  margin-top: 30px;
+}
+
 .container-log-in {
     display: flex;
     flex-direction: column;
@@ -13,23 +19,28 @@
     position: relative;
     width: 300px;
     height: 400px;
-    margin-top: 30px;
+    margin-top: 10px;
     background-color: rgb(52, 52, 52);
     border-radius: 10px;
   }
-  .container-log-in input {
+  .form-reg-input {
     height: 30px;
     width: 250px;
     border-radius: 3px;
   }
 .container-input-radio {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    color: white;
+    justify-content: center;
   }
 .container-input-radio label {
-    margin-bottom: 10px;
+    margin-right: 20px;
+  }
+  .container-input-radio input {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    margin-right: 5px;
   }
 .form-reg-error {
   color: red;
@@ -41,4 +52,18 @@
 }
 .form-input-error {
   border: 2px solid red;
+}
+.user-registry-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  z-index: 1;
+  gap: 15px;
+  margin-top: 20px;
+}
+.user-registry-title {
+  color: white;
+
 }
